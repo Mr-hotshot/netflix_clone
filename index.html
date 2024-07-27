@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/netflix_logo.png" alt="Netflix Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">TV Shows</a></li>
+                <li><a href="#">Movies</a></li>
+                <li><a href="#">Latest</a></li>
+                <li><a href="#">My List</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <input type="text" id="search-box" placeholder="Search...">
+            <div id="search-results"></div>
+        </div>
+        <div class="profile">
+            <img src="images/profile-image.png" alt="Profile Avatar">
+        </div>
+    </header>
+
+    <section class="hero">
+        <img src="images/hero-banner.png" alt="Hero Banner">
+        <div class="hero-content">
+            <h1>Watch Now</h1>
+            <p>Unlimited movies, TV shows, and more.</p>
+            <a href="subscription.html"><button>Get Started</button></a>
+        </div>
+    </section>
+
+    <section class="content">
+        <h2>Trending Now</h2>
+        <div class="row">
+            <a href="movie.html?title=Movie+1"><div class="card"><img src="images/movie-1.png" alt="Movie 1"></div></a>
+            <a href="movie.html?title=Movie+2"><div class="card"><img src="images/movie-2.png" alt="Movie 2"></div></a>
+            <a href="movie.html?title=Movie+3"><div class="card"><img src="images/movie-3.png" alt="Movie 3"></div></a>
+        </div>
+    </section>
+
+    <section class="content">
+        <h2>Top Picks for You</h2>
+        <div class="row">
+            <a href="movie.html?title=Movie+4"><div class="card"><img src="images/movie-4.png" alt="Movie 4"></div></a>
+            <a href="movie.html?title=Movie+5"><div class="card"><img src="images/movie-5.png" alt="Movie 5"></div></a>
+            <a href="movie.html?title=Movie+6"><div class="card"><img src="images/movie-6.png" alt="Movie 6"></div></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Netflix Clone. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
