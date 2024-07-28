@@ -13,7 +13,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="#">TV Shows</a></li>
                 <li><a href="#">Movies</a></li>
                 <li><a href="#">Latest</a></li>
@@ -41,18 +41,25 @@
     <section class="content">
         <h2>Trending Now</h2>
         <div class="row">
-            <a href="movie.html?title=Movie+1"><div class="card"><img src="images/movie-1.png" alt="Movie 1"></div></a>
-            <a href="movie.html?title=Movie+2"><div class="card"><img src="images/movie-2.png" alt="Movie 2"></div></a>
-            <a href="movie.html?title=Movie+3"><div class="card"><img src="images/movie-3.png" alt="Movie 3"></div></a>
+            <div class="card" data-title="Movie 1"><img src="images/movie-1.png" alt="Movie 1"><button class="watchlist-button">Add to Watchlist</button></div>
+            <div class="card" data-title="Movie 2"><img src="images/movie-2.png" alt="Movie 2"><button class="watchlist-button">Add to Watchlist</button></div>
+            <div class="card" data-title="Movie 3"><img src="images/movie-3.png" alt="Movie 3"><button class="watchlist-button">Add to Watchlist</button></div>
         </div>
     </section>
 
     <section class="content">
         <h2>Top Picks for You</h2>
         <div class="row">
-            <a href="movie.html?title=Movie+4"><div class="card"><img src="images/movie-4.png" alt="Movie 4"></div></a>
-            <a href="movie.html?title=Movie+5"><div class="card"><img src="images/movie-5.png" alt="Movie 5"></div></a>
-            <a href="movie.html?title=Movie+6"><div class="card"><img src="images/movie-6.png" alt="Movie 6"></div></a>
+            <div class="card" data-title="Movie 4"><img src="images/movie-4.png" alt="Movie 4"><button class="watchlist-button">Add to Watchlist</button></div>
+            <div class="card" data-title="Movie 5"><img src="images/movie-5.png" alt="Movie 5"><button class="watchlist-button">Add to Watchlist</button></div>
+            <div class="card" data-title="Movie 6"><img src="images/movie-6.png" alt="Movie 6"><button class="watchlist-button">Add to Watchlist</button></div>
+        </div>
+    </section>
+
+    <section class="content">
+        <h2>Your Watchlist</h2>
+        <div id="watchlist" class="row">
+            <!-- Watchlist items will be appended here -->
         </div>
     </section>
 

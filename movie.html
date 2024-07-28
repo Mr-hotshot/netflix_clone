@@ -31,6 +31,13 @@
         };
 
         document.getElementById('movie-logo').src = movieLogos[movieTitle];
+
+        // Netflix Logo Navigation
+        document.querySelectorAll('.logo img').forEach(logo => {
+            logo.onclick = function() {
+                window.location.href = 'index.html';
+            };
+        });
     </script>
 </body>
 </html>

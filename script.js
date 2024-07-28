@@ -19,7 +19,7 @@ document.getElementById('search-box').addEventListener('input', function() {
             const div = document.createElement('div');
             div.textContent = movie.title;
             div.addEventListener('click', () => {
-                window.open(`movie.html?title=${encodeURIComponent(movie.title)}`, '_blank');
+                window.location.href = `movie.html?title=${encodeURIComponent(movie.title)}`;
             });
             searchResultsContainer.appendChild(div);
         });
@@ -36,4 +36,71 @@ document.addEventListener('click', function(event) {
     if (!searchBox.contains(event.target) && !searchResults.contains(event.target)) {
         searchResults.style.display = 'none';
     }
+});
+
+// Watchlist Functionality
+document.querySelectorAll('.watchlist-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const movieTitle = this.parentElement.getAttribute('data-title');
+        addToWatchlist(movieTitle);
+    });
+});
+
+function addToWatchlist(movieTitle) {
+    const watchlist = document.getElementById('watchlist');
+    const movie = movies.find(m => m.title === movieTitle);
+    
+    if (movie && !isInWatchlist(movieTitle)) {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        
+        const img = document.createElement('img');
+        img.src = movie.img;
+        img.alt = movie.title;
+
+        const title = document.createElement('h3');
+        title.textContent = movie.title;
+
+        const button = document.createElement('button');
+        button.textContent = 'Remove from Watchlist';
+        button.classList.add('watchlist-button');
+        button.addEventListener('click', () => removeFromWatchlist(movieTitle));
+
+        card.appendChild(img);
+        card.appendChild(title);
+        card.appendChild(button);
+
+        watchlist.appendChild(card);
+    }
+}
+
+function removeFromWatchlist(movieTitle) {
+    const watchlist = document.getElementById('watchlist');
+    const cards = watchlist.querySelectorAll('.card');
+    cards.forEach(card => {
+        if (card.querySelector('h3').textContent === movieTitle) {
+            card.remove();
+        }
+    });
+}
+
+function isInWatchlist(movieTitle) {
+    const watchlist = document.getElementById('watchlist');
+    const cards = watchlist.querySelectorAll('.card');
+    for (const card of cards) {
+        if (card.querySelector('h3').textContent === movieTitle) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Add click event to navigate to movie details page
+document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', function(event) {
+        if (event.target.tagName !== 'BUTTON') {
+            const movieTitle = this.getAttribute('data-title');
+            window.location.href = `movie.html?title=${encodeURIComponent(movieTitle)}`;
+        }
+    });
 });

@@ -15,6 +15,7 @@ header {
 
 .logo img {
     height: 40px;
+    cursor: pointer;
 }
 
 nav ul {
@@ -124,6 +125,7 @@ nav a {
 .row {
     display: flex;
     overflow-x: auto;
+    padding-bottom: 20px;
 }
 
 .card {
@@ -163,4 +165,33 @@ th {
 
 td {
     background-color: #222;
+}
+
+.watchlist-container {
+    margin-top: 20px;
+}
+
+.watchlist {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.watchlist .card {
+    width: 150px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.watchlist-button {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.watchlist-button:hover {
+    background-color: #f40612;
 }
