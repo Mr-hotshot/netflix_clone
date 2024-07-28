@@ -4,103 +4,99 @@ const movies = [
     { title: 'Movie 3', img: 'images/movie-3.png' },
     { title: 'Movie 4', img: 'images/movie-4.png' },
     { title: 'Movie 5', img: 'images/movie-5.png' },
-    { title: 'Movie 6', img: 'images/movie-6.png' },
+    { title: 'Movie 6', img: 'images/movie-6.png' }
 ];
 
-document.getElementById('search-box').addEventListener('input', function() {
-    const query = this.value.toLowerCase();
-    const results = movies.filter(movie => movie.title.toLowerCase().includes(query));
-    
-    const searchResultsContainer = document.getElementById('search-results');
-    searchResultsContainer.innerHTML = '';
-
-    if (results.length > 0) {
-        results.forEach(movie => {
-            const div = document.createElement('div');
-            div.textContent = movie.title;
-            div.addEventListener('click', () => {
-                window.location.href = `movie.html?title=${encodeURIComponent(movie.title)}`;
-            });
-            searchResultsContainer.appendChild(div);
-        });
-        searchResultsContainer.style.display = 'block';
-    } else {
-        searchResultsContainer.style.display = 'none';
-    }
-});
-
-document.addEventListener('click', function(event) {
+document.addEventListener('DOMContentLoaded', () => {
+    const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+    const watchlistContainer = document.getElementById('watchlist-container');
+    const watchlistButtons = document.querySelectorAll('.watchlist-button');
     const searchBox = document.getElementById('search-box');
     const searchResults = document.getElementById('search-results');
-    
-    if (!searchBox.contains(event.target) && !searchResults.contains(event.target)) {
-        searchResults.style.display = 'none';
+    const theme = localStorage.getItem('theme') || 'light';
+
+    const displayWatchlist = () => {
+        watchlistContainer.innerHTML = '';
+        watchlist.forEach(movieTitle => {
+            const movie = movies.find(m => m.title === movieTitle);
+            if (movie) {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                    <img src="${movie.img}" alt="${movie.title}">
+                    <button class="remove-watchlist-button" data-title="${movie.title}">Remove from Watchlist</button>
+                `;
+                watchlistContainer.appendChild(card);
+            }
+        });
+    };
+
+    watchlistButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const movieTitle = button.dataset.title;
+            if (!watchlist.includes(movieTitle)) {
+                watchlist.push(movieTitle);
+                localStorage.setItem('watchlist', JSON.stringify(watchlist));
+                displayWatchlist();
+            }
+        });
+    });
+
+    watchlistContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-watchlist-button')) {
+            const movieTitle = event.target.dataset.title;
+            const index = watchlist.indexOf(movieTitle);
+            if (index !== -1) {
+                watchlist.splice(index, 1);
+                localStorage.setItem('watchlist', JSON.stringify(watchlist));
+                displayWatchlist();
+            }
+        }
+    });
+
+    searchBox.addEventListener('input', () => {
+        const query = searchBox.value.toLowerCase();
+        searchResults.innerHTML = '';
+        if (query) {
+            const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(query));
+            filteredMovies.forEach(movie => {
+                const div = document.createElement('div');
+                div.textContent = movie.title;
+                div.addEventListener('click', () => {
+                    window.location.href = `movie.html?title=${encodeURIComponent(movie.title)}`;
+                });
+                searchResults.appendChild(div);
+            });
+            searchResults.style.display = 'block';
+        } else {
+            searchResults.style.display = 'none';
+        }
+    });
+
+    window.setTheme = (theme) => {
+        document.body.className = theme;
+        localStorage.setItem('theme', theme);
+        if (theme === 'light') {
+            document.body.style.color = 'black';
+        } else if (theme === 'dark') {
+            document.body.style.color = 'white';
+        } else {
+            document.body.style.color = 'black';
+        }
+    };
+
+    document.body.className = theme;
+    if (theme === 'light') {
+        document.body.style.color = 'black';
+    } else if (theme === 'dark') {
+        document.body.style.color = 'white';
+    } else {
+        document.body.style.color = 'black';
     }
+
+    displayWatchlist();
 });
 
-// Watchlist Functionality
-document.querySelectorAll('.watchlist-button').forEach(button => {
-    button.addEventListener('click', function() {
-        const movieTitle = this.parentElement.getAttribute('data-title');
-        addToWatchlist(movieTitle);
-    });
-});
-
-function addToWatchlist(movieTitle) {
-    const watchlist = document.getElementById('watchlist');
-    const movie = movies.find(m => m.title === movieTitle);
-    
-    if (movie && !isInWatchlist(movieTitle)) {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        
-        const img = document.createElement('img');
-        img.src = movie.img;
-        img.alt = movie.title;
-
-        const title = document.createElement('h3');
-        title.textContent = movie.title;
-
-        const button = document.createElement('button');
-        button.textContent = 'Remove from Watchlist';
-        button.classList.add('watchlist-button');
-        button.addEventListener('click', () => removeFromWatchlist(movieTitle));
-
-        card.appendChild(img);
-        card.appendChild(title);
-        card.appendChild(button);
-
-        watchlist.appendChild(card);
-    }
-}
-
-function removeFromWatchlist(movieTitle) {
-    const watchlist = document.getElementById('watchlist');
-    const cards = watchlist.querySelectorAll('.card');
-    cards.forEach(card => {
-        if (card.querySelector('h3').textContent === movieTitle) {
-            card.remove();
-        }
-    });
-}
-
-function isInWatchlist(movieTitle) {
-    const watchlist = document.getElementById('watchlist');
-    const cards = watchlist.querySelectorAll('.card');
-    for (const card of cards) {
-        if (card.querySelector('h3').textContent === movieTitle) {
-            return true;
-        }
-    }
-    return false;
-}
-
-// Add click event to navigate to movie details page
-document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('click', function(event) {
-        if (event.target.tagName !== 'BUTTON') {
-            const movieTitle = this.getAttribute('data-title');
-            window.location.href = `movie.html?title=${encodeURIComponent(movieTitle)}`;
-        }
-    });
+document.getElementById('netflix-logo').addEventListener('click', () => {
+    window.location.href = 'index.html';
 });

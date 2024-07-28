@@ -1,197 +1,226 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #141414;
-    color: #fff;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
     background-color: #141414;
-}
-
-.logo img {
-    height: 40px;
-    cursor: pointer;
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-nav li {
-    margin-right: 20px;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.search-container {
-    margin-left: auto;
-    position: relative;
-}
-
-.search-container input {
-    padding: 10px;
-    border: none;
-    border-radius: 2px;
-}
-
-#search-results {
-    position: absolute;
-    background-color: #333;
-    border-radius: 2px;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    display: none;
-    z-index: 10;
-}
-
-#search-results div {
-    padding: 10px;
-    cursor: pointer;
-}
-
-#search-results div:hover {
-    background-color: #444;
-}
-
-.profile img {
-    height: 40px;
-    border-radius: 20px;
-    margin-left: 20px;
-}
-
-.hero {
-    position: relative;
-    text-align: center;
     color: white;
 }
 
-.hero img {
-    width: 100%;
+header .logo img {
+    height: 40px;
 }
 
-.hero-content {
+header nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+header .search-container {
+    position: relative;
+}
+
+header .search-container input {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+}
+
+header .search-container #search-results {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+    width: 100%;
+    display: none;
+}
+
+header .search-container #search-results div {
+    padding: 5px;
+    cursor: pointer;
+}
+
+header .search-container #search-results div:hover {
+    background: #eee;
+}
+
+header .profile img {
+    height: 40px;
+    border-radius: 50%;
+}
+
+header .theme-selector button {
+    margin-left: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+section.hero {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    background: #141414;
+}
+
+section.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+section.hero .hero-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    color: white;
 }
 
-.hero-content h1 {
-    font-size: 48px;
-    margin: 0;
+section.hero .hero-content h1 {
+    font-size: 50px;
 }
 
-.hero-content p {
-    font-size: 18px;
-    margin: 10px 0;
+section.hero .hero-content p {
+    font-size: 20px;
 }
 
-.hero-content button {
+section.hero .hero-content button {
     padding: 10px 20px;
-    font-size: 18px;
-    background-color: #e50914;
+    background: red;
     color: white;
     border: none;
-    border-radius: 2px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.hero-content button:hover {
-    background-color: #f40612;
-}
-
-.content {
+section.content {
     padding: 20px;
 }
 
-.content h2 {
-    margin: 20px 0;
+section.content h2 {
+    font-size: 24px;
 }
 
-.row {
+section.content .row {
     display: flex;
-    overflow-x: auto;
-    padding-bottom: 20px;
+    justify-content: space-around;
 }
 
-.card {
-    flex: 0 0 auto;
+section.content .card {
+    position: relative;
     width: 200px;
-    margin-right: 20px;
+    margin: 10px;
     cursor: pointer;
 }
 
-.card img {
+section.content .card img {
     width: 100%;
     border-radius: 5px;
 }
 
-footer {
-    background-color: #141414;
-    padding: 20px;
-    text-align: center;
-    color: #737373;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th, td {
-    border: 1px solid #444;
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #333;
-}
-
-td {
-    background-color: #222;
-}
-
-.watchlist-container {
-    margin-top: 20px;
-}
-
-.watchlist {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.watchlist .card {
-    width: 150px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-}
-
-.watchlist-button {
-    background-color: #e50914;
+section.content .card button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: red;
     color: white;
     border: none;
-    border-radius: 2px;
-    padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
-    margin-top: 5px;
 }
 
-.watchlist-button:hover {
-    background-color: #f40612;
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #141414;
+    color: white;
+}
+
+/* Themes */
+
+body.light {
+    background-color: white;
+    color: black;
+}
+
+body.light header {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+body.light footer {
+    background-color: #f1f1f1;
+    color: black;
+}
+
+body.dark {
+    background-color: #141414;
+    color: white;
+}
+
+body.red {
+    background-color: #ffcccb;
+    color: black;
+}
+
+body.blue {
+    background-color: #b3cde0;
+    color: black;
+}
+
+body.green {
+    background-color: #ccebc5;
+    color: black;
+}
+
+body.yellow {
+    background-color: #fff2cc;
+    color: black;
+}
+section.content .card {
+    position: relative;
+    width: 200px;
+    margin: 10px;
+    cursor: pointer;
+    text-align: center; /* Center align the button */
+}
+
+section.content .card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+section.content .card button {
+    margin-top: 10px; /* Add some space between the image and the button */
+    padding: 5px 10px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
